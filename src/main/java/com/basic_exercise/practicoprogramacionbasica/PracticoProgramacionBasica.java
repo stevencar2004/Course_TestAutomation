@@ -1,6 +1,7 @@
 package com.basic_exercise.practicoprogramacionbasica;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -93,9 +94,112 @@ public class PracticoProgramacionBasica {
                            addInRecentsOptions(optionMenu);
                            System.out.println("Result " + result4);
                        break;
+                       
+                    case 5:
+                           System.out.println("Write an integer number: ");
+                           String numberInteger = inputValue.next();
+                           
+                           boolean result5 = checkNumberIsCapicua(numberInteger);
+                           addInRecentsOptions(optionMenu);
+                           System.out.println("Result " + result5);
+                       break;
+                    
+                   case 6:
+                           System.out.println("Write a number A: ");
+                           int numA = inputValue.nextInt();
+                           
+                           System.out.println("Write a number B: ");
+                           int numB = inputValue.nextInt();
+                           
+                           boolean result6 = findBiggerNum(numA, numB);
+                           addInRecentsOptions(optionMenu);
+                           System.out.println("Result " + result6);
+                       break;
+                       
+                   case 7:
+                       System.out.print("Write a first number: ");
+                       double value1 = inputValue.nextDouble();
+                           
+                       System.out.print("Write a second number: ");
+                       double value2 = inputValue.nextDouble();
+                           
+                       boolean result7 = multiplyAndDivide(value1, value2);
+                       addInRecentsOptions(optionMenu);
+                       System.out.println("Result " + result7);
+                       break;
+                       
+                   case 8:
+                     
+                      ArrayList<Integer> arrayA = new ArrayList<>();
+                      ArrayList<Integer> arrayB = new ArrayList<>();
+                      boolean isFinishArrayA = false;
+                      boolean isFinishArrayB = false;
                       
-                   case 12:
+                      numOfItem = 0;
+                       System.out.println("Write the values for array A");
+                      do{
+                           System.out.print("Item " + numOfItem + ": ");
+                           int value = inputValue.nextInt();
+                           arrayA.add(value);
+                           System.out.print("Other value? S/N ");
+                           String isIntoOtherValue = inputValue.next().toLowerCase();
+                           
+                           if(isIntoOtherValue.equals("n")){
+                               isFinishArrayA = true;
+                           }
+                           
+                           numOfItem++;
+                      } while (isFinishArrayA == false);
+                      
+                      numOfItem = 0;
+                       System.out.println("Write the values for array B");
+                      do{
+                           System.out.print("Item " + numOfItem + ": ");
+                           int value = inputValue.nextInt();
+                           arrayB.add(value);
+                           System.out.print("Other value? S/N ");
+                           String isIntoOtherValue = inputValue.next().toLowerCase();
+                           
+                           if(isIntoOtherValue.equals("n")){
+                               isFinishArrayB = true;
+                           }
+                           
+                           numOfItem++;
+                      } while (isFinishArrayB == false);
+                      
+                      boolean result8 = checkValuesOfTwoArrays(arrayA, arrayB);
+                      addInRecentsOptions(optionMenu);
+                      System.out.println("Result " + result8);
+                       break;
+                       
+                   case 9:
+                      System.out.println("Write any word: ");
+                       String initialWord = inputValue.next();
+                       
+                       String result11 = invertWord(initialWord);
+                       addInRecentsOptions(optionMenu);
+                       System.out.println("Result " + result11);
+                       
+                       break; 
+                       
+                   case 10:
+                      System.out.println("Write any word: ");
+                      String word = inputValue.next();
+                      String letter = "x";
+                      
+                      String result10 = replaceLetters(word, letter);
+                      addInRecentsOptions(optionMenu);
+                      System.out.println("Result " + result10);            
+                       break; 
+                       
+                   case 11:
                       System.out.println("The five recents options by code are: " + recentOptions.toString());
+                       break;
+                       
+                   case 12:
+                      System.out.println("Copy an Paste in your browser this link");
+                      System.out.println("https://github.com/stevencar2004/Course_TestAutomation");
+                      addInRecentsOptions(optionMenu);
                        break;
                        
                    case 13:
@@ -109,8 +213,8 @@ public class PracticoProgramacionBasica {
                existError = true;
                System.out.println("GooBye!");
            } catch(Exception e) {
-               System.out.println("Try Again!");
-               optionMenu = 1;
+               System.out.println("Several Error!");
+               existError = true;
            } 
          
         } while (existError == false);      
@@ -139,7 +243,7 @@ public class PracticoProgramacionBasica {
     }
     
     public static void addInRecentsOptions(int option){
-        if(recentOptions.size() > 5){
+        if(recentOptions.size() >= 5){
             recentOptions.remove(0);
         }
         recentOptions.add(option);
@@ -170,6 +274,56 @@ public class PracticoProgramacionBasica {
     
     public static boolean validateWords(String word1, String word2){
         return word1.equals(word2);
+    }
+
+    public static boolean checkNumberIsCapicua(String number){
+         int middle = Math.round((number.length()) / 2);
+         
+         String itemsForLeft = (number.length() % 2 == 0) ? number.substring(0,middle) : number.substring(0,middle+1);
+         String itemsForRigth = number.substring(middle);
+ 
+         String reverse = new StringBuffer(itemsForRigth).reverse().toString();
+         
+         return itemsForLeft == reverse;
+    }
+    
+    public static boolean findBiggerNum(int numA, int numB){
+        return numA < numB;
+    }
+
+    public static boolean multiplyAndDivide(double num1, double num2){
+        double multiply = num1 * num2;
+        double divide = num1 / num2;
+        
+        return multiply == divide;
+    }
+    
+    public static boolean checkValuesOfTwoArrays(ArrayList<Integer> arr1, ArrayList<Integer> arr2){
+         int amountItemsEven = 0;
+        
+        for (Integer integer : arr1) {
+            if( arr2.indexOf(integer) >= 0){
+                amountItemsEven++;
+            }
+            if(amountItemsEven >= 2) break;
+        }
+        return amountItemsEven >= 2;
+    }
+    
+    public static String invertWord(String word) {
+           return  new StringBuffer(word).reverse().toString();
+    }
+    
+    public static String replaceLetters(String word, String letter) {
+         String newWord = word;
+
+         newWord = newWord.replace("a", letter);
+         newWord = newWord.replace("e", letter);
+         newWord = newWord.replace("i", letter);
+         newWord = newWord.replace("o", letter);
+         newWord = newWord.replace("u", letter);
+
+        return newWord;
     }
 }
 
