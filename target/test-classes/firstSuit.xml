@@ -1,0 +1,34 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<!-- Creamos una suit de tests -->
+<suite name="Test Suite" verbose="5" thread-count="2" parallel="tests">
+    <!-- Indicamos cual va ser nuestro primer caso de prueba,
+         le indicamos el nombre y cual clase va a ejecutar
+    -->
+    <test name="RadioButtonYes">
+        <!-- Indicamos que grupo se va a estar ejecutando
+            (Unicamente los Test que pertenezcan a el se ejecutaran)
+        -->
+        <groups>
+            <run>
+                <include name="ClickRadioButtons"/>
+            </run>
+        </groups>
+
+        <classes>
+            <class name="Suits.Test2"></class>
+        </classes>
+    </test>
+
+    <test name="RadioButtonImpresive">
+        <groups>
+            <run>
+                <include name="ClickRadioButtons"/>
+            </run>
+        </groups>
+
+        <classes>
+            <class name="Suits.Test1"></class>
+        </classes>
+    </test>
+</suite>
